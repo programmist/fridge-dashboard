@@ -24,6 +24,8 @@ const mockData = [
  * Mock database access class
  */
 export default class FridgeService {
+  // TODO: Calculate time between sequential FridgeCycles
+  // May need a wrapper class composed of FridgeCycles of a particular fridge
   getAll() {
     return mockData.map((cycle) => new FridgeCycle(cycle));
   }
