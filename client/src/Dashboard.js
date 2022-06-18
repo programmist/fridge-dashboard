@@ -11,10 +11,15 @@ export default function Dashboard() {
       .then((data) => setFridges(data));
   }, []);
 
-  // TODO: Generate graph with translucent overlay and text on top with "Fridge $X"
-  //       wrap in <a href> to Fridge page
-  //       use hover effect to indicate click-ability
+  // TODO1: Generate graph with translucent overlay and text on top with "Fridge $X"
+  //        NOTE: Maybe generate graph and turn into stock image (would be easier/faster-loading)
+  //        wrap in <a href> to Fridge page
+  //        use hover effect to indicate click-ability
 
+  // TODO2: Create component that generates the fridge list above
+  //        main component and sub-component for each fridge item
+
+  // TODO3: Create script that runs both client and server of this project (via npm start)
   return (
     <div className="main">
       {window.location.pathname === "/" ? (
