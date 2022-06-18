@@ -35,4 +35,11 @@ export default class FridgeService {
         return metrics;
       }, {});
   }
+
+  getFridge(fridgeId) {
+    return mockData
+      .filter((cycle) => cycle[0] === fridgeId)
+      .map((cycle) => new FridgeCycle(cycle))
+      .sort((cycle1, cycle2) => cycle1.cooldownNumber - cycle2.cooldownNumber);
+  }
 }
