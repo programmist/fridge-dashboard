@@ -1,0 +1,19 @@
+.fridge-list {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.fridge-menu-item {
+  display: block;
+  text-decoration: none;
+  color: blue;
+}
+
+a.fridge-menu-item:hover {
+  text-decoration: underline;
+}
