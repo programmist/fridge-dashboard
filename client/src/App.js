@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-function App() {
+export default function App() {
   let [data, setData] = useState("");
   useEffect(() => {
     fetch("/api")
@@ -30,5 +30,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
