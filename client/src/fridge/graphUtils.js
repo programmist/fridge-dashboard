@@ -3,7 +3,7 @@
  */
 export const cooldownDataXform = (dataTemplate, fridgeData) => {
   return fridgeData.reduce((data, cycle) => {
-    data.labels.push(`cycle ${cycle.cooldownNumber}`);
+    data.labels.push(`Cycle ${cycle.cooldownNumber}`);
     data.datasets[0].data.push(cycle.cooldownTime / 3600); // seconds -> hours
     return data;
   }, dataTemplate);
@@ -14,7 +14,7 @@ export const cooldownDataXform = (dataTemplate, fridgeData) => {
  */
 export const warmupDataXform = (dataTemplate, fridgeData) => {
   return fridgeData.reduce((data, cycle) => {
-    data.labels.push(`cycle ${cycle.cooldownNumber}`);
+    data.labels.push(`Cycle ${cycle.cooldownNumber}`);
     data.datasets[0].data.push(cycle.warmupTime / 3600); // seconds -> hours
     return data;
   }, dataTemplate);
@@ -31,7 +31,7 @@ export const btwnCycleXform = (dataTemplate, fridgeData) => {
       (new Date(cooldownStart).getTime() - new Date(warmupEnd).getTime()) /
       1000;
 
-    dataTemplate.labels.push(`cycles ${i} - ${i + 1}`);
+    dataTemplate.labels.push(`Cycles ${i} - ${i + 1}`);
     dataTemplate.datasets[0].data.push(btwnTime / 3600); // seconds -> hours
   }
   return dataTemplate;
