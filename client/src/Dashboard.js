@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import chart from "./chart.png";
 import "./Dashboard.css";
 import Fridge from "./fridge/Fridge";
 
@@ -11,32 +12,28 @@ export default function Dashboard() {
       .then((data) => setFridges(data));
   }, []);
 
-  // TODO1: Generate graph with translucent overlay and text on top with "Fridge $X"
-  //        NOTE: Maybe generate graph and turn into stock image (would be easier/faster-loading)
-  //        wrap in <a href> to Fridge page
-  //        use hover effect to indicate click-ability
+  // TODO1: Create script that runs both client and server of this project (via npm start)
 
-  // TODO2: Create component that generates the fridge list above
-  //        main component and sub-component for each fridge item
-
-  // TODO3: Create script that runs both client and server of this project (via npm start)
-
-  // TODO4: review app and consider assumptions and future changes (for interview code review)
+  // TODO2: review app and consider assumptions and future changes (for interview code review)
   return (
-    <div className="main">
+    <>
       {window.location.pathname === "/" ? (
-        <ul className="fridge-list">
-          {Object.keys(fridges).map((fridgeId) => (
-            <li key={fridgeId}>
-              <a className="fridge-menu-item" href={`fridge/${fridgeId}`}>
-                Fridge {fridgeId}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="main">
+          <h1>Select a Fridge</h1>
+          <div className="fridge-list">
+            {Object.keys(fridges).map((fridgeId) => (
+              <div key={fridgeId}>
+                <a className="fridge-menu-item" href={`fridge/${fridgeId}`}>
+                  <img src={chart} alt={`Fridge ${fridgeId}`} />
+                  <div className="fridge-name">Fridge {fridgeId}</div>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <Fridge />
       )}
-    </div>
+    </>
   );
 }

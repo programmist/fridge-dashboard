@@ -1,8 +1,24 @@
 .fridge {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.fridge > h1 {
+  font-size: 3em;
+}
+
+.graphs {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 1270px) {
+  .graphs {
+    flex-direction: column;
+  }
+}
+
+.graph-container {
+  margin: 10px;
 }

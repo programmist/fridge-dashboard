@@ -1,19 +1,59 @@
-.fridge-list {
-  min-height: 100vh;
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.main > h1 {
+  font-size: 3em;
+}
+
+.fridge-list {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .fridge-list {
+    flex-direction: column;
+  }
 }
 
 .fridge-menu-item {
   display: block;
   text-decoration: none;
-  color: blue;
+  color: black;
+  position: relative;
+  text-align: center;
+  border: 1px #777 solid;
+  margin: 5px;
+  height: 170px;
+  font-size: 35px;
 }
 
-a.fridge-menu-item:hover {
+.fridge-menu-item:hover {
+  color: white;
+}
+
+.fridge-menu-item:hover {
   text-decoration: underline;
+}
+
+.fridge-menu-item img {
+  filter: blur(2px);
+  width: 170px;
+}
+
+.fridge-menu-item img:hover {
+  filter: invert(1);
+}
+
+.fridge-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 100%;
 }
