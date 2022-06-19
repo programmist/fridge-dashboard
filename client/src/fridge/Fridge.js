@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   btwnCycleXform,
   cooldownDataXform,
+  summaryXform,
   warmupDataXform,
 } from "./graphUtils";
 import {
@@ -14,9 +15,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
 import "./Fridge.css";
 import FridgeLineChart from "./FridgeLineChart";
+import FridgeBarChart from "./FridgeBarChart";
 
 ChartJS.register(
   CategoryScale,
@@ -76,7 +77,16 @@ export default function Fridge() {
           fridgeData={fridgeData}
         />
       </div>
-      <div id="summary"></div>
+      <div id="summary">
+        {/* <FridgeBarChart
+          label="Summary (hours)"
+          styles={{
+            backgroundColor: "rgba(180, 90, 250, 0.5)",
+          }}
+          transformationFn={percentagesXform}
+          fridgeData={fridgeData}
+        /> */}
+      </div>
       <pre
         style={{
           border: "thin white solid",

@@ -2,26 +2,23 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
-import "./Fridge.css";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-export default function FridgeLineChart({
+export default function FridgeBarChart({
   label,
   styles,
   transformationFn,
@@ -33,7 +30,6 @@ export default function FridgeLineChart({
       {
         label,
         data: [],
-        borderColor: styles.borderColor,
         backgroundColor: styles.backgroundColor,
       },
     ],
@@ -41,5 +37,5 @@ export default function FridgeLineChart({
 
   const data = transformationFn(dataTemplate, fridgeData);
 
-  return <div>{data.labels.length > 0 && <Line data={data} />}</div>;
+  return <div>{data.labels.length > 0 && <Bar data={data} />}</div>;
 }

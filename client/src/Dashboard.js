@@ -20,6 +20,8 @@ export default function Dashboard() {
   //        main component and sub-component for each fridge item
 
   // TODO3: Create script that runs both client and server of this project (via npm start)
+
+  // TODO4: review app and consider assumptions and future changes (for interview code review)
   return (
     <div className="main">
       {window.location.pathname === "/" ? (
