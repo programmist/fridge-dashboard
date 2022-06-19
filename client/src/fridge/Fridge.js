@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { cooldownDataXform, warmupDataXform } from "./graphUtils";
+import {
+  btwnCycleXform,
+  cooldownDataXform,
+  warmupDataXform,
+} from "./graphUtils";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -41,7 +45,7 @@ export default function Fridge() {
       <h1>Fridge {fridgeId}</h1>
       <div id="cooldowns">
         <FridgeLineChart
-          label={`Fridge ${fridgeId} Cooldown Cycles (hours)`}
+          label="Cooldown Cycles (hours)"
           styles={{
             borderColor: "rgb(53, 162, 235)",
             backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -52,7 +56,7 @@ export default function Fridge() {
       </div>
       <div id="warmups">
         <FridgeLineChart
-          label={`Fridge ${fridgeId} Warmup Cycles (hours)`}
+          label="Warmup Cycles (hours)"
           styles={{
             borderColor: "rgb(255, 99, 132)",
             backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -61,7 +65,17 @@ export default function Fridge() {
           fridgeData={fridgeData}
         />
       </div>
-      <div id="between"></div>
+      <div id="between">
+        <FridgeLineChart
+          label="Time Between Cycles (hours)"
+          styles={{
+            borderColor: "rgb(21 172 58)",
+            backgroundColor: "rgba(21, 172, 58, 0.5)",
+          }}
+          transformationFn={btwnCycleXform}
+          fridgeData={fridgeData}
+        />
+      </div>
       <div id="summary"></div>
       <pre
         style={{
