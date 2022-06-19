@@ -25,7 +25,7 @@ export default function FridgeBarChart({
   fridgeData = {},
 }) {
   const dataTemplate = {
-    labels: [],
+    labels: ["Cooldown Time", "Warmup Time", "Cold Time"],
     datasets: [
       {
         label,

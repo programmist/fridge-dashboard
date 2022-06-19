@@ -13,6 +13,10 @@ export default class FridgeCycle {
     this.cooldownEnd = cooldownEnd;
     this.warmupStart = warmupStart;
     this.warmupEnd = warmupEnd;
+    this.cycleTime = this.getTimeDurationInSeconds(
+      this.cooldownStart,
+      this.warmupEnd
+    );
     this.cooldownTime = this.getTimeDurationInSeconds(
       this.cooldownStart,
       this.cooldownEnd
@@ -20,6 +24,10 @@ export default class FridgeCycle {
     this.warmupTime = this.getTimeDurationInSeconds(
       this.warmupStart,
       this.warmupEnd
+    );
+    this.coldTime = this.getTimeDurationInSeconds(
+      this.cooldownEnd,
+      this.warmupStart
     );
   }
 

@@ -1,44 +1,29 @@
-/*
- *
- */
-const cloneTemplate = (dataTemplate) => {
-  return structuredClone({
-    ...dataTemplate,
-    datasets: [
-      {
-        ...dataTemplate.datasets[0],
-      },
-    ],
-  });
-};
-
 /**
- *
+ * Transform data for chart showing cool-down times (hours) for each cycle
  */
 export const cooldownDataXform = (dataTemplate, fridgeData) => {
-  var data = cloneTemplate(dataTemplate);
   return fridgeData.reduce((data, cycle) => {
     data.labels.push(`cycle ${cycle.cooldownNumber}`);
-    data.datasets[0].data.push(cycle.cooldownTime / 3600); // milliseconds -> hours
+    data.datasets[0].data.push(cycle.cooldownTime / 3600); // seconds -> hours
     return data;
-  }, data);
+  }, dataTemplate);
 };
 
+/*
+ * Transform data for chart showing warm-up times (hours) for each cycle
+ */
 export const warmupDataXform = (dataTemplate, fridgeData) => {
-  var data = cloneTemplate(dataTemplate);
   return fridgeData.reduce((data, cycle) => {
     data.labels.push(`cycle ${cycle.cooldownNumber}`);
-    data.datasets[0].data.push(cycle.warmupTime / 3600); // milliseconds -> hours
+    data.datasets[0].data.push(cycle.warmupTime / 3600); // seconds -> hours
     return data;
-  }, data);
+  }, dataTemplate);
 };
 
 /**
- *
+ * Transform data for chart showing times (hours) between cycles for each cycle
  */
 export const btwnCycleXform = (dataTemplate, fridgeData) => {
-  var data = cloneTemplate(dataTemplate);
-
   for (let i = 0; i < fridgeData.length - 1; i++) {
     const warmupEnd = fridgeData[i].warmupEnd;
     const cooldownStart = fridgeData[i + 1].cooldownStart;
@@ -46,33 +31,59 @@ export const btwnCycleXform = (dataTemplate, fridgeData) => {
       (new Date(cooldownStart).getTime() - new Date(warmupEnd).getTime()) /
       1000;
 
-    data.labels.push(`cycles ${i} - ${i + 1}`);
-    data.datasets[0].data.push(btwnTime / 3600); // milliseconds -> hours
+    dataTemplate.labels.push(`cycles ${i} - ${i + 1}`);
+    dataTemplate.datasets[0].data.push(btwnTime / 3600); // seconds -> hours
   }
-  return data;
+  return dataTemplate;
+};
+
+/*
+ * Return total times of all fridge cycles in seconds
+ */
+const calculateTotals = (fridgeData) => {
+  return fridgeData.reduce(
+    (totals, cycle) => {
+      // Sum total time of all cycles
+      totals.totalTime += cycle.cycleTime;
+
+      // Sum cycle cooldown times
+      totals.totalCooldownTime += cycle.cooldownTime;
+
+      // Sum cycle warm-up times
+      totals.totalWarmupTime += cycle.warmupTime;
+
+      // Sum cycle cold times
+      totals.totalColdTime += cycle.coldTime;
+
+      return totals;
+    },
+    {
+      totalTime: 0,
+      totalCooldownTime: 0,
+      totalWarmupTime: 0,
+      totalColdTime: 0,
+    }
+  );
 };
 
 /**
- * Summary of percent of time spent cooling down, percent of time spent warming up and
- * percent of time cold across all past cycles.
+ * Calculate and return summary data for all fridge cycles
+ * - Percent of time spent cooling down
+ * - Percent of time spent warming up and
+ * - Percent of time cold across all past cycles
  */
 export const summaryXform = (dataTemplate, fridgeData) => {
-  var data = cloneTemplate(dataTemplate).reduce(
-    (data, cycle) => {
-      // TODO: Calculate total cycle time = time spent cold + cooling down + warming up
-      //
-      // TODO: Calculate total time spent cooling down (intermediate value)
-      // TODO: Calculate PERCENT time spent cooling down
-      //
-      // TODO: Calculate total time spent warming up (intermediate value)
-      // TODO: Calculate PERCENT time spent warming up
-      //
-      // TODO: Calculate total time cold (intermediate value)
-      // TODO: Calculate PERCENT time cold
-      //
-      // TODO: manually create labels
-      // TODO: manually add data from above calculations
-    },
-    { totalTime: 0, totalCooldown: 0, totalwarmup: 0, totalCold: 0 }
-  );
+  let { totalTime, totalCooldownTime, totalWarmupTime, totalColdTime } =
+    calculateTotals(fridgeData);
+
+  const percentCooldownTime = (totalCooldownTime / totalTime) * 100;
+  const percentWarmupTime = (totalWarmupTime / totalTime) * 100;
+  const percentColdTime = (totalColdTime / totalTime) * 100;
+
+  dataTemplate.datasets[0].data = [
+    percentCooldownTime,
+    percentWarmupTime,
+    percentColdTime,
+  ];
+  return dataTemplate;
 };

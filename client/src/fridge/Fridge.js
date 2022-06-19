@@ -78,29 +78,15 @@ export default function Fridge() {
         />
       </div>
       <div id="summary">
-        {/* <FridgeBarChart
-          label="Summary (hours)"
+        <FridgeBarChart
+          label="Summary (percent)"
           styles={{
             backgroundColor: "rgba(180, 90, 250, 0.5)",
           }}
-          transformationFn={percentagesXform}
+          transformationFn={summaryXform}
           fridgeData={fridgeData}
-        /> */}
+        />
       </div>
-      <pre
-        style={{
-          border: "thin white solid",
-          textAlign: "left",
-          width: "700px",
-          height: "400px",
-          overflow: "scroll",
-          whiteSpace: "pre-wrap",
-          wordBreak: "break-word",
-          color: "green",
-        }}
-      >
-        {JSON.stringify(fridgeData, null, 2)}
-      </pre>
     </div>
   );
 }
