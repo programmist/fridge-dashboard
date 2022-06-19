@@ -12,13 +12,6 @@ export default function Dashboard() {
       .then((data) => setFridges(data));
   }, []);
 
-  // TODO1: Create script that runs both client and server of this project (via npm start)
-
-  // TODO2: review app and consider assumptions and future changes (for interview code review)
-
-  // TODO3: Create Github issues for needed changes (enhancements, polish, bugs, etc)
-
-  // TODO4: Move README.md to root & do small write-up of how to run (and maybe short description of app)
   return (
     <>
       {window.location.pathname === "/" ? (
